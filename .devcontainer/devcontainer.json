@@ -1,0 +1,31 @@
+{
+    "name": "Go 开发环境",
+    "image": "mcr.microsoft.com/devcontainers/go:latest",
+    "mountWorkspaceGitRoot": false,
+    "extraHosts": ["host.docker.internal:host-gateway"],
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest"
+        }
+    },
+    "postCreateCommand": {
+        "gitConfig": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+        "setup": "bash .devcontainer/setup.sh"
+    },
+    "containerEnv": {
+        "HTTP_PROXY": "http://host.docker.internal:6789",
+        "HTTPS_PROXY": "http://host.docker.internal:6789",
+        "NO_PROXY": "localhost,127.0.0.1,host.docker.internal"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go"
+            ],
+            "settings": {
+                "git.terminalAuthentication": true,
+                "http.proxy": "http://host.docker.internal:6789"
+            }
+        }
+    }
+}
